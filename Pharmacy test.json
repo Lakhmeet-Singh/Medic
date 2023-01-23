@@ -1,0 +1,64 @@
+{"intents": 
+[
+    {
+      "Questions": "[\"Where is the closest pharmacy?\", \"Can you tell me where to find a pharmacy nearby?\", \"I need to find a pharmacy, can you help me locate one?\", \"Can you recommend a pharmacy close by?\", \"Can you give me the address of the nearest pharmacy?\",  \"I am looking for a pharmacy, do you know of any nearby?\", \"Can you help me find a pharmacy in the area?\", \"Can you tell me the location of the closest pharmacy?\", \"Can you give me directions to the nearest pharmacy?\"]",
+      "OrganisationType": "Pharmacy",
+      "OrganisationName": "Lords Pharmacy ",
+      "Address": "UNIT 61, THE GUINEAS SHOPPING CTR, NEWMARKET, SUFFOLK, CB8 8EQ",
+      "Area": "Suffolk and North East Essex STP",
+      "Phone": "01638 428022",
+      "Email": "Not Found",
+      "Website": "https://www.lordspharmacynewmarket.co.uk/"
+    },
+    {
+      "Questions": ["Where is the closest pharmacy?", "Can you tell me where to find a pharmacy nearby?", "I need to find a pharmacy, can you help me locate one?", "Can you recommend a pharmacy close by?", "Can you give me the address of the nearest pharmacy?",  "I am looking for a pharmacy, do you know of any nearby?", "Can you help me find a pharmacy in the area?", "Can you tell me the location of the closest pharmacy?", "Can you give me directions to the nearest pharmacy?"],
+      "OrganisationType": "Pharmacy",
+      "OrganisationName": "LLOYDSPHARMACY",
+      "Address": "SAINSBURY'S STORE, CHURCH STREET, CARLISLE, CUMBRIA, CA2 5TF",
+      "Area": "Cumbria and North East STP",
+      "Phone": "0 1228533915",
+      "Email": "lp5045@lloydspharmacy.co.uk",
+      "Website": "http://www.lloydspharmacy.com"
+    },
+    {
+      "Questions": ["Where is the closest pharmacy?", "Can you tell me where to find a pharmacy nearby?", "I need to find a pharmacy, can you help me locate one?", "Can you recommend a pharmacy close by?", "Can you give me the address of the nearest pharmacy?",  "I am looking for a pharmacy, do you know of any nearby?", "Can you help me find a pharmacy in the area?", "Can you tell me the location of the closest pharmacy?", "Can you give me directions to the nearest pharmacy?"],
+      "OrganisationType": "Pharmacy",
+      "OrganisationName": "Rutland Late Night Pharmacy ",
+      "Address": "45A-45B HIGH STREET,  , OAKHAM, RUTLAND, LE15 6AJ",
+      "Area": "Leicester, Leicestershire and Rutland STP",
+      "Phone": "01572 723368",
+      "Email": "rutland.pharmacy@nhs.net",
+      "Website": "https://www.rutlandpharmacy.co.uk"
+    },
+    {
+      "Questions": ["Where is the closest pharmacy?", "Can you tell me where to find a pharmacy nearby?", "I need to find a pharmacy, can you help me locate one?", "Can you recommend a pharmacy close by?", "Can you give me the address of the nearest pharmacy?",  "I am looking for a pharmacy, do you know of any nearby?", "Can you help me find a pharmacy in the area?", "Can you tell me the location of the closest pharmacy?", "Can you give me directions to the nearest pharmacy?"],
+      "OrganisationType": "Pharmacy",
+      "OrganisationName": "Cohens Chemist",
+      "Address": "CASTLE MEAD MEDICAL CTR., HILL STREET, HINCKLEY, LEICESTERSHIRE, LE10 1DS",
+      "Area": "Leicester, Leicestershire and Rutland STP",
+      "Phone": "0 1455613100",
+      "Email": "branch.732@mycohens.net",
+      "Website": "https://www.cohenschemist.co.uk/"
+    },
+    {
+      "Questions": ["Where is the closest pharmacy?", "Can you tell me where to find a pharmacy nearby?", "I need to find a pharmacy, can you help me locate one?", "Can you recommend a pharmacy close by?", "Can you give me the address of the nearest pharmacy?",  "I am looking for a pharmacy, do you know of any nearby?", "Can you help me find a pharmacy in the area?", "Can you tell me the location of the closest pharmacy?", "Can you give me directions to the nearest pharmacy?"],
+      "OrganisationType": "Pharmacy",
+      "OrganisationName": "East Street Pharmacy",
+      "Address": "WARDERS MEDICAL CENTRE, 47 EAST STREET, TONBRIDGE, KENT, TN9 1LA",
+      "Area": "Kent and Medway STP",
+      "Phone": "01732 770055",
+      "Email": "Not Found",
+      "Website": "http://www.piilboxchemists.co.uk"
+    },
+    {
+      "Questions": "[\"Where is the closest pharmacy?\", \"Can you tell me where to find a pharmacy nearby?\", \"I need to find a pharmacy, can you help me locate one?\", \"Can you recommend a pharmacy close by?\", \"Can you give me the address of the nearest pharmacy?\",  \"I am looking for a pharmacy, do you know of any nearby?\", \"Can you help me find a pharmacy in the area?\", \"Can you tell me the location of the closest pharmacy?\", \"Can you give me directions to the nearest pharmacy?\"]",
+      "OrganisationType": "Pharmacy",
+      "OrganisationName": "ALLCURES PLC",
+      "Address": "HEADCORN SURGERY, GRIGG LANE, HEADCORN, ASHFORD, KENT, TN27 9AA",
+      "Area": "Kent and Medway STP",
+      "Phone": "01622 890758",
+      "Email": "Not Found",
+      "Website": "Not Found"
+      }
+  ]
+}
