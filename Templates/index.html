@@ -39,8 +39,11 @@
     </main>
 
     <form class="msger-inputarea">
-      <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
+      <input type="text" class="msger-input" id="textInput msgerInputArea" placeholder="Enter your message...">
       <button type="submit" class="msger-send-btn">Send</button>
+      <form class="msger-inputarea">
+    </form>
+        
     </form>
   </section>
   <!-- partial -->
@@ -100,8 +103,8 @@
         appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
 
       });
-
     }
+
 
 
     // Utils

@@ -55,16 +55,8 @@ def predict_class(sentence, model):
         return return_list
 
 def get_pharmacy_information(area):
-    area = clean_up_sentence(area)
-    list_of_intents = intents['intents']
-    result = []
-    for i in list_of_intents:
-        if area in i["Area"]:
-            result.append("OrganisationName: {}, Address: {}, Area: {}, Phone: {}, Email: {}, Website: {}".format(i['OrganisationName'],i['Address'],i['Area'],i['Phone'],i['Email'],i['Website']))
-    if result:
-        return result
-    else:
-        return "Sorry, I couldn't find a pharmacy in that area"
+    area = "Which area are you looking the pharmacy in?"
+    return area
 
 
 def getResponse(ints, intents_json):
@@ -73,8 +65,8 @@ def getResponse(ints, intents_json):
         list_of_intents = intents_json['intents']
         for i in list_of_intents:
             if ('Questions' in i) and (utterance in i['Questions']):
-                result = 'Which area are you looking the pharmacy in?'
-                area = input(result)
+                result = 'Which area are you looking the pharmacy in?' # this is showing in console not on GUI
+                area = input(result) #error
                 area = area.upper()
                 result = []
                 for i in list_of_intents:
@@ -96,6 +88,7 @@ def chatbot_response(msg):
     ints = predict_class(msg, model)
     res = getResponse(ints, intents)
     return res
+
 
 
 
