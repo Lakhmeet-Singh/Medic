@@ -33,6 +33,11 @@
           "tag": "additional_Detail",
           "patterns": ["Additional detail", "More information"],
           "responses": ["Please provide more information about your symptoms", "I can help you find information about your symptoms"]
+        },
+        {
+          "tag": "treatment",
+          "patterns": ["Can you provide me the treatment", "Can you provide me with medication"],
+          "responses": ["Please provide more information about your symptoms", "I can help you find information about your symptoms"]
         }
    ]
 }

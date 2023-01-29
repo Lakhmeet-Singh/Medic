@@ -75,8 +75,7 @@ def getResponse(ints, intents_json):
 #Health API Call
 ignore_words = ['[', ']', '\xa0', '/n', '[":']
 def get_symptoms_info(symptoms):
-    value = symptoms
-    user_input = '-'.join(value)
+    user_input = '-'.join(symptoms)
     response = requests.get('https://api.nhs.uk/conditions/'+user_input+'?subscription-key=63ed187fd4db46b0898e29baea194d5f').json()
     str = json.dumps(response) #dict to str
     data = json.loads(str) #str to dict
@@ -157,9 +156,28 @@ def tokenize_question(question):
             medical_words.append(word)
     return medical_words
 
+#Medicine API Call
+def get_treatment_info(symptoms):
+    user_input = '-'.join(symptoms)
+    response = requests.get('https://api.nhs.uk/conditions/'+user_input+'/treatment?subscription-key=63ed187fd4db46b0898e29baea194d5f').json()
+    str = json.dumps(response) #dict to str
+    data = json.loads(str) #str to dict
+    return data
+
+def treatment_info(data):
+    text = ''
+    newdata = data['mainEntityOfPage']
+    for data in newdata:
+        if data['position'] > 2:
+            for sub_data in data['mainEntityOfPage']:
+                text = sub_data['text']
+                print(text)
+    return text
+
 #Chatbot response to user querys
 def chatbot_response(msg):
     ints = predict_class(msg, model)
+    text = 'treatment'
     if ints[0]['intent'] == 'symptoms':
         medical_terms = tokenize_question(msg) # pass only the medical terms to the api
         if medical_terms:
@@ -168,6 +186,7 @@ def chatbot_response(msg):
             return 'Symptoms name and description: {}'.format(nameDescription)
         else:
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
+
     elif ints[0]['intent'] == 'additional_Detail':
         medical_terms = tokenize_question(msg)
         if medical_terms:
@@ -180,8 +199,27 @@ def chatbot_response(msg):
                 return 'Additional Information: {}'.format(mainEntityOfPage_Data)
         else:
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
+
+    elif ints[0]['intent'] == 'treatment':
+        medical_terms = tokenize_question(msg)
+        if medical_terms:
+            symptoms_info = get_treatment_info(medical_terms)
+            treatment = treatment_info(symptoms_info)
+            return 'Treatment: {}'.format(treatment)
+        else:
+            return "Sorry! I couldn't understand you. Could you please rephrase your question?"
+
     else:
         res = getResponse(ints, intents)
         return res
 
 print('DOCTORBOT is Ready')
+
+
+
+
+value = input("Enter a search query: ")
+medical_terms = tokenize_question(value)
+symptoms_info = get_treatment_info(medical_terms)
+treatment = treatment_info(symptoms_info)
+print (treatment)
