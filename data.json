@@ -1,0 +1,38 @@
+{"intents": 
+  [
+        {"tag": "greeting",
+         "patterns": ["Hi there", "Hey", "Hello", "Good day"],
+         "responses": ["Hello", "Good to see you", "Hi there", "Hi", "Hey"]
+        },
+        {"tag": "followupQuestions",
+        "patterns": ["How are you?", "How is it going?", "What are you doing?"],
+        "responses": ["I am doing Good!, thanks for asking",  "Great!", "How can I help you?"]
+       },
+        {"tag": "goodbye",
+         "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
+         "responses": ["See you!", "Have a nice day", "Bye!","Hope, I was able to help you"]
+        },
+        {"tag": "thanks",
+         "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+         "responses": ["Happy to help!", "Hope, I was able to help you", "My pleasure"]
+        },
+        {"tag": "noanswer",
+         "patterns": ["I don't know"],
+         "responses": ["Sorry, i can't understand you", "Please give me more info", "Not sure I understand"]
+        },
+        {"tag": "options",
+         "patterns": ["How you could help me?", "What you can do?", "What help you provide?", "How you can be helpful?", "What support is offered"],
+         "responses": ["I can guide you through your Health Symptoms, Medication and Pharmacies", "I can support you finding information about your Health Symptoms, Medication and Pharmacies"]
+        },
+        {
+          "tag": "symptoms",
+          "patterns": ["fever", "cough", "cold", "flu", "headache", "stomachache", "pain", "acne", "back pain", "scars", "fever-in-adults"],
+          "responses": ["Please provide more information about your symptoms", "I can help you find information about your symptoms"]
+        },
+        {
+          "tag": "additional_Detail",
+          "patterns": ["Additional detail", "More information"],
+          "responses": ["Please provide more information about your symptoms", "I can help you find information about your symptoms"]
+        }
+   ]
+}

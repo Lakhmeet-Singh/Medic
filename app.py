@@ -2,6 +2,9 @@ import json
 import random
 import nltk
 import pickle
+import requests
+import json
+import markdown
 import numpy as np
 
 nltk.download('popular')
@@ -10,7 +13,7 @@ from keras.models import load_model
 
 lemmatizer = WordNetLemmatizer()
 
-data_file = open('Pharmacy test.json').read()
+data_file = open('data.json').read()
 intents = json.loads(data_file)
 
 model = load_model('model.h5')
@@ -42,6 +45,7 @@ def bow(sentence, words, show_details=True):
 
 
 def predict_class(sentence, model):
+    # filter out predictions below a threshold
     BagOfWords = bow(sentence, words, show_details=False)
     res = model.predict(np.array([BagOfWords]))[0]
     ERROR_THRESHOLD = 0.25
@@ -51,62 +55,133 @@ def predict_class(sentence, model):
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
     for r in results:
-        return_list.append({"question": sentence, "probability": str(r[1])})
-        return return_list
-
-def get_pharmacy_information(area):
-    area = "Which area are you looking the pharmacy in?"
-    return area
+        return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
+    return return_list
 
 
+# Chatbot Conversation
+
+
+#Standard Conversation
 def getResponse(ints, intents_json):
-    if ints:
-        utterance = ints[0]['question']
-        list_of_intents = intents_json['intents']
-        for i in list_of_intents:
-            if ('Questions' in i) and (utterance in i['Questions']):
-                result = 'Which area are you looking the pharmacy in?' # this is showing in console not on GUI
-                area = input(result) #error
-                area = area.upper()
-                result = []
-                for i in list_of_intents:
-                    if area in i["Address"]:
-                        result.append("OrganisationName: {}, Address: {}, Area: {}, Phone: {}, Email: {}, Website: {}".format(i['OrganisationName'],i['Address'],i['Area'],i['Phone'],i['Email'],i['Website']))
-                if result:
-                    return result
-                else:
-                    return "Sorry, I couldn't find a pharmacy in that area"
-            else:
-                return "Sorry, i can't understand you"
-    else:
-        return "Sorry, I couldn't find a pharmacy in that area"
+    tag = ints[0]['intent']
+    list_of_intents = intents_json['intents']
+    for i in list_of_intents:
+        if (i['tag'] == tag):
+            result = random.choice(i['responses'])
+            break
+    return result
+
+#Health API Call
+ignore_words = ['[', ']', '\xa0', '/n', '[":']
+def get_symptoms_info(symptoms):
+    value = symptoms
+    user_input = '-'.join(value)
+    response = requests.get('https://api.nhs.uk/conditions/'+user_input+'?subscription-key=63ed187fd4db46b0898e29baea194d5f').json()
+    str = json.dumps(response) #dict to str
+    data = json.loads(str) #str to dict
+    return data
+
+#Extracting name and description from Health API 
+def name_description(data):
+    name = data['name']
+    description = data['description']
+    url = data['url']
+    text = "URL: "
+    add_info_title = "Note: "
+    more_info = "More information - Symptom name"
+    bold_note_info = markdown.markdown(f'*{more_info}*')
+    add_info = "If you require additional information, please type your query in the following format: " + bold_note_info
+    bold_note_title = markdown.markdown(f'**{add_info_title}**')
+    bold_text = markdown.markdown(f'**{text}**')
+    bold_name = markdown.markdown(f'**{name + ": "}**')
+    for word in ignore_words:
+        if word in description:
+            description = description.replace(word, " ")
+    return bold_name + description + '\n' + bold_text + url + '\n' +  bold_note_title + add_info
 
 
-print('DOCTORBOT is Ready')
+#Extracting other information from Health API 
+def hasPart(data):
+    parts_data_1 = []
+    parts_data_2 = []
+    newdata = data['hasPart']
+    for data in newdata:
+        heading = data['headline'] 
+        nested_description = data['description']
+        bold_heading = markdown.markdown(f'**{heading}**')
+        parts_data_1.append(bold_heading + nested_description)
 
+        hasPart = data['hasPart']
+        for nested_data in hasPart:
+            try: 
+                headline = nested_data['headline']
+                text = nested_data['text']
+                bold_headline = markdown.markdown(f'**{headline}**')
+                for word in ignore_words:
+                    if word in text:
+                        text = text.replace(word , " ")
+                parts_data_2.append(bold_headline + text)
+            except KeyError:
+                pass
+    return parts_data_1 + parts_data_2
+
+#Extracting other information from Health API where hasPart is not there.
+def mainEntityOfPage(data):
+    newdata = data['mainEntityOfPage']
+    parts_data = []
+    for data in newdata:
+        hasPart = data['hasPart']
+        for nested_data in hasPart:
+            try: 
+                headline = nested_data['headline'] 
+                text = nested_data['text']
+                bold_headline = markdown.markdown(f'**{headline}**')
+                for word in ignore_words:
+                    if word in text:
+                        text = text.replace(word, " ")
+                parts_data.append(bold_headline + text)
+            except KeyError:
+                 pass
+    return parts_data
+ 
+# Load a medical terms lexicon or pre-trained model
+medical_terms = set(['fever', 'cough', 'cold', 'flu', 'headache', 'stomachache', 'pain', 'acne', 'back pain', 'scars', 'stroke', 'fever-in-adults'])
+
+#tokensizing the sentence to find the medical term
+def tokenize_question(question):
+    words = nltk.word_tokenize(question)
+    medical_words = []
+    for word in words:
+        if word in medical_terms:
+            medical_words.append(word)
+    return medical_words
+
+#Chatbot response to user querys
 def chatbot_response(msg):
     ints = predict_class(msg, model)
-    res = getResponse(ints, intents)
-    return res
+    if ints[0]['intent'] == 'symptoms':
+        medical_terms = tokenize_question(msg) # pass only the medical terms to the api
+        if medical_terms:
+            symptoms_info = get_symptoms_info(medical_terms)
+            nameDescription = name_description(symptoms_info)
+            return 'Symptoms name and description: {}'.format(nameDescription)
+        else:
+            return "Sorry! I couldn't understand you. Could you please rephrase your question?"
+    elif ints[0]['intent'] == 'additional_Detail':
+        medical_terms = tokenize_question(msg)
+        if medical_terms:
+            symptoms_info = get_symptoms_info(medical_terms)
+            hasPart_Data = hasPart(symptoms_info)
+            mainEntityOfPage_Data = mainEntityOfPage(symptoms_info)
+            if hasPart_Data:
+                return 'Additional Information: {}'.format(hasPart_Data)
+            else:
+                return 'Additional Information: {}'.format(mainEntityOfPage_Data)
+        else:
+            return "Sorry! I couldn't understand you. Could you please rephrase your question?"
+    else:
+        res = getResponse(ints, intents)
+        return res
 
-
-
-
-from flask import Flask, render_template, request
-
-app = Flask(__name__)
-app.static_folder = 'static'
-
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-
-@app.route("/get")
-def get_bot_response():
-    userText = request.args.get('msg')
-    return chatbot_response(userText)
-
-if __name__ == "__main__":
-    app.run()
+print('DOCTORBOT is Ready')
