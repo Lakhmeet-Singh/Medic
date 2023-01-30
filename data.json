@@ -31,7 +31,7 @@
         },
         {
           "tag": "treatment",
-          "patterns": ["Can you provide me with the treatment for:", "Can you provide me with medication"],
+          "patterns": ["Can you provide me with the treatment for:"],
           "responses": ["Please provide more information about your symptoms", "I can help you find information about your symptoms"]
         },
         {
