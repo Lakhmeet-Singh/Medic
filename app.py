@@ -143,9 +143,46 @@ def mainEntityOfPage(data):
             except KeyError:
                  pass
     return parts_data
- 
+
+#treatment api call
+def get_treatment_info(symptoms):
+    user_input = '-'.join(symptoms)
+    try:
+        response = requests.get('https://api.nhs.uk/conditions/'+user_input+'/treatment?subscription-key=63ed187fd4db46b0898e29baea194d5f').json()
+        str = json.dumps(response) #dict to str
+        data = json.loads(str) #str to dict
+        return data
+    except:
+        return "Sorry, no treatment information found for the given symptoms."
+
+
+def treatment_info(data):
+    text_array = []
+    try:
+        newdata = data['mainEntityOfPage']
+        for data in newdata:
+            if data['position']:
+                for sub_data in data['mainEntityOfPage']:
+                    text = sub_data['text']
+                    text_array.append(text)
+    except:
+        return "Sorry, no treatment information found for the given symptoms."
+    return text_array
+    
 # Load a medical terms lexicon or pre-trained model
-medical_terms = set(['fever', 'cough', 'cold', 'flu', 'headache', 'stomachache', 'pain', 'acne', 'back pain', 'scars', 'stroke', 'fever-in-adults'])
+medical_terms = set(["abdominal-aortic-aneurysm-screening", "abdominal-aortic-aneurysm", "abdominal-aortic-aneurysm-screening", "abortion", "abscess", 
+          "acanthosis-nigricans", "achalasia", "acid-and-chemical-burns", "reflux-in-babies", "acne", "acoustic-neuroma", "acromegaly", "actinic-keratoses", 
+          "actinomycosis", "acupuncture", "acute-cholecystitis", "acute-kidney-injury", "acute-lymphoblastic-leukaemia", "acute-myeloid-leukaemia", "acute-pancreatitis", 
+          "acute-respiratory-distress-syndrome", "addison's-disease", "adenoidectomy", "age-related-cataracts", "age-related-macular-degeneration-amd", "agoraphobia", "air-embolism", 
+          "albinism", "alcohol-misuse", "alcohol-poisoning", "alcohol-related-liver-disease", "alexander-technique", "alkaptonuria", "allergic-rhinitis", "allergies", "altitude-sickness",
+          "alzheimer's-disease", "lazy-eye", "memory-loss-amnesia", "amniocentesis", "amputation", "amyloidosis", "anabolic-steroid-misuse", "iron-deficiency-anaemia", 
+          "vitamin-B12-or-folate-deficiency-anaemia", "anaesthesia", "anal-cancer", "anal-fissure", "anal-fistula", "anal-pain", "anaphylaxis", "androgen-insensitivity-syndrome", 
+          "abdominal-aortic-aneurysm", "brain-aneurysm", "angelman-syndrome", "angina", "angioedema", "angiography", "coronary-angioplasty-and-stent-insertion", "animal-and-human-bites", 
+          "ankle-pain", "ankylosing-spondylitis", "anorexia-nervosa", "lost-or-changed-sense-of-smell", "antacids", "antibiotics", "anticoagulant-medicines", "antidepressants", "antifungal-medicines", 
+          "antihistamines", "antiphospholipid-syndrome", "antisocial-personality-disorder", "itchy-anus", "anxiety-disorders-in-children", "aortic-valve-replacement", "aphasia", "appendicitis", "arrhythmia",
+          "arterial-thrombosis", "arthritis", "arthroscopy", "asbestosis", "autism", "aspergillosis", "aspirin", "asthma", "astigmatism", "ataxia", "atherosclerosis", "athletes-foot", "atopic-eczema",
+          "atrial-fibrillation", "attention-deficit-hyperactivity-disorder-adhd", "auditory-processing-disorder", "autism", "autosomal-dominant-polycystic-kidney-disease-adpkd",
+          "autosomal-recessive-polycystic-kidney-disease-arpkd", "bird-flu"])
 
 #tokensizing the sentence to find the medical term
 def tokenize_question(question):
@@ -156,23 +193,9 @@ def tokenize_question(question):
             medical_words.append(word)
     return medical_words
 
-#Medicine API Call
-def get_treatment_info(symptoms):
-    user_input = '-'.join(symptoms)
-    response = requests.get('https://api.nhs.uk/conditions/'+user_input+'/treatment?subscription-key=63ed187fd4db46b0898e29baea194d5f').json()
-    str = json.dumps(response) #dict to str
-    data = json.loads(str) #str to dict
-    return data
 
-def treatment_info(data):
-    text = ''
-    newdata = data['mainEntityOfPage']
-    for data in newdata:
-        if data['position'] > 2:
-            for sub_data in data['mainEntityOfPage']:
-                text = sub_data['text']
-                print(text)
-    return text
+#Medicine API Call
+
 
 #Chatbot response to user querys
 def chatbot_response(msg):
@@ -208,7 +231,7 @@ def chatbot_response(msg):
             return 'Treatment: {}'.format(treatment)
         else:
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
-
+    
     else:
         res = getResponse(ints, intents)
         return res
@@ -218,8 +241,10 @@ print('DOCTORBOT is Ready')
 
 
 
-value = input("Enter a search query: ")
-medical_terms = tokenize_question(value)
-symptoms_info = get_treatment_info(medical_terms)
-treatment = treatment_info(symptoms_info)
-print (treatment)
+# value = input("Enter a search query: ")
+# # medical_terms = tokenize_question(value)
+# # symptoms_info = get_treatment_info(medical_terms)
+# # treatment = treatment_info(symptoms_info)
+# # print (treatment)
+
+# print (get_symptoms_info(value))
