@@ -10,15 +10,21 @@ import numpy as np
 nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
-from health import get_symptoms_info, name_description, hasPart, mainEntityOfPage, get_treatment_info, treatment_info
 
-lemmatizer = WordNetLemmatizer()
+from health import get_symptoms_info, name_description, hasPart, mainEntityOfPage, get_treatment_info, treatment_info
+from standard import get_standard_response
+from symptoms import medical_terms
+from pharmacy import get_pharmacy_response
 
 data_file = open('data.json').read()
 intents = json.loads(data_file)
 
-model = load_model('model.h5')
+pharmacy_data = open('Pharmacy test.json').read()
+pharmacy_intent = json.loads(pharmacy_data)
 
+
+model = load_model('model.h5')
+lemmatizer = WordNetLemmatizer()
 
 words = pickle.load(open('texts.pkl', 'rb'))
 classes = pickle.load(open('labels.pkl', 'rb'))
@@ -60,34 +66,6 @@ def predict_class(sentence, model):
     return return_list
 
 
-# Chatbot Conversation
-
-
-#Standard Conversation
-def getResponse(ints, intents_json):
-    tag = ints[0]['intent']
-    list_of_intents = intents_json['intents']
-    for i in list_of_intents:
-        if (i['tag'] == tag):
-            result = random.choice(i['responses'])
-            break
-    return result
-    
-# Load a medical terms lexicon or pre-trained model
-medical_terms = set(["abdominal-aortic-aneurysm-screening", "abdominal-aortic-aneurysm", "abdominal-aortic-aneurysm-screening", "abortion", "abscess", 
-          "acanthosis-nigricans", "achalasia", "acid-and-chemical-burns", "reflux-in-babies", "acne", "acoustic-neuroma", "acromegaly", "actinic-keratoses", 
-          "actinomycosis", "acupuncture", "acute-cholecystitis", "acute-kidney-injury", "acute-lymphoblastic-leukaemia", "acute-myeloid-leukaemia", "acute-pancreatitis", 
-          "acute-respiratory-distress-syndrome", "addison's-disease", "adenoidectomy", "age-related-cataracts", "age-related-macular-degeneration-amd", "agoraphobia", "air-embolism", 
-          "albinism", "alcohol-misuse", "alcohol-poisoning", "alcohol-related-liver-disease", "alexander-technique", "alkaptonuria", "allergic-rhinitis", "allergies", "altitude-sickness",
-          "alzheimer's-disease", "lazy-eye", "memory-loss-amnesia", "amniocentesis", "amputation", "amyloidosis", "anabolic-steroid-misuse", "iron-deficiency-anaemia", 
-          "vitamin-B12-or-folate-deficiency-anaemia", "anaesthesia", "anal-cancer", "anal-fissure", "anal-fistula", "anal-pain", "anaphylaxis", "androgen-insensitivity-syndrome", 
-          "abdominal-aortic-aneurysm", "brain-aneurysm", "angelman-syndrome", "angina", "angioedema", "angiography", "coronary-angioplasty-and-stent-insertion", "animal-and-human-bites", 
-          "ankle-pain", "ankylosing-spondylitis", "anorexia-nervosa", "lost-or-changed-sense-of-smell", "antacids", "antibiotics", "anticoagulant-medicines", "antidepressants", "antifungal-medicines", 
-          "antihistamines", "antiphospholipid-syndrome", "antisocial-personality-disorder", "itchy-anus", "anxiety-disorders-in-children", "aortic-valve-replacement", "aphasia", "appendicitis", "arrhythmia",
-          "arterial-thrombosis", "arthritis", "arthroscopy", "asbestosis", "autism", "aspergillosis", "aspirin", "asthma", "astigmatism", "ataxia", "atherosclerosis", "athletes-foot", "atopic-eczema",
-          "atrial-fibrillation", "attention-deficit-hyperactivity-disorder-adhd", "auditory-processing-disorder", "autism", "autosomal-dominant-polycystic-kidney-disease-adpkd",
-          "autosomal-recessive-polycystic-kidney-disease-arpkd", "bird-flu"])
-
 #tokensizing the sentence to find the medical term
 def tokenize_question(question):
     words = nltk.word_tokenize(question)
@@ -98,13 +76,9 @@ def tokenize_question(question):
     return medical_words
 
 
-#Medicine API Call
-
-
 #Chatbot response to user querys
 def chatbot_response(msg):
     ints = predict_class(msg, model)
-    text = 'treatment'
     if ints[0]['intent'] == 'symptoms':
         medical_terms = tokenize_question(msg) # pass only the medical terms to the api
         if medical_terms:
@@ -143,8 +117,14 @@ def chatbot_response(msg):
         else:
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
     
+    elif ints[0]['intent'] == 'pharmacy':
+        return "Which area are you looking the pharmacy in?"
+    
+    elif ints[0]['intent'] == 'pharmacy_follow_up_question':
+        return get_pharmacy_response(msg, pharmacy_intent )
+
     else:
-        res = getResponse(ints, intents)
+        res = get_standard_response(ints, intents)
         return res
 
 print('DOCTORBOT is Ready')

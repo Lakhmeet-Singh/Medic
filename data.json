@@ -38,8 +38,11 @@
           "tag": "pharmacy",
           "patterns": ["Where is the closest pharmacy?", "Can you tell me where to find a pharmacy nearby?", "I need to find a pharmacy, can you help me locate one?", 
           "Can you recommend a pharmacy close by?","Can you give me the address of the nearest pharmacy?",  "I am looking for a pharmacy, do you know of any nearby?",
-          "Can you help me find a pharmacy in the area?", "Can you tell me the location of the closest pharmacy?","Can you give me directions to the nearest pharmacy?"],
-          "responses": ["Please provide more information about your symptoms", "I can help you find information about your symptoms"]
+          "Can you help me find a pharmacy in the area?", "Can you tell me the location of the closest pharmacy?","Can you give me directions to the nearest pharmacy?"]
+        },
+        {
+          "tag": "pharmacy_follow_up_question",
+          "patterns": ["The area is in: "]
         },
         {
           "tag": "symptoms",
@@ -55,8 +58,7 @@
           "antihistamines", "antiphospholipid-syndrome", "antisocial-personality-disorder", "itchy-anus", "anxiety-disorders-in-children", "aortic-valve-replacement", "aphasia", "appendicitis", "arrhythmia",
           "arterial-thrombosis", "arthritis", "arthroscopy", "asbestosis", "autism", "aspergillosis", "aspirin", "asthma", "astigmatism", "ataxia", "atherosclerosis", "athletes-foot", "atopic-eczema",
           "atrial-fibrillation", "attention-deficit-hyperactivity-disorder-adhd", "auditory-processing-disorder", "autism", "autosomal-dominant-polycystic-kidney-disease-adpkd",
-          "autosomal-recessive-polycystic-kidney-disease-arpkd", "bird-flu"],
-          "responses": ["Please provide more information about your symptoms", "I can help you find information about your symptoms"]
+          "autosomal-recessive-polycystic-kidney-disease-arpkd", "bird-flu"]
         }
    ]
 }
