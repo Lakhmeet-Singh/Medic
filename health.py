@@ -7,8 +7,9 @@ from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
 
-#Health API Call
 ignore_words = ['[', ']', '\xa0', '/n', '[":']
+
+#Health API Call
 def get_symptoms_info(symptoms):
     user_input = '-'.join(symptoms)
     response = requests.get('https://api.nhs.uk/conditions/'+user_input+'?subscription-key=63ed187fd4db46b0898e29baea194d5f').json()

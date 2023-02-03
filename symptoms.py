@@ -1,4 +1,4 @@
-
+import random
 
 # Load a medical terms lexicon or pre-trained model
 medical_terms = set([
@@ -16,3 +16,9 @@ medical_terms = set([
           "atrial-fibrillation", "attention-deficit-hyperactivity-disorder-adhd", "auditory-processing-disorder", "autism", "autosomal-dominant-polycystic-kidney-disease-adpkd",
           "autosomal-recessive-polycystic-kidney-disease-arpkd", "bird-flu"
           ])
+
+medicines_terms = set(["naproxen", "paracetamol-for-adults"])
+
+medical_terms_list = list(medical_terms)
+choose = random.choice(medical_terms_list)
+print(choose)

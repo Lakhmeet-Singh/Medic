@@ -13,8 +13,9 @@ from keras.models import load_model
 
 from health import get_symptoms_info, name_description, hasPart, mainEntityOfPage, get_treatment_info, treatment_info
 from standard import get_standard_response
-from symptoms import medical_terms
+from symptoms import medical_terms, medicines_terms
 from pharmacy import get_pharmacy_response
+from medicines import get_medicine_info, medicine_name_description, medicine_hasPart
 
 data_file = open('data.json').read()
 intents = json.loads(data_file)
@@ -67,7 +68,7 @@ def predict_class(sentence, model):
 
 
 #tokensizing the sentence to find the medical term
-def tokenize_question(question):
+def tokenize_health_question(question):
     words = nltk.word_tokenize(question)
     medical_words = []
     for word in words:
@@ -75,12 +76,20 @@ def tokenize_question(question):
             medical_words.append(word)
     return medical_words
 
+def tokenize_medicines_question(question):
+    words = nltk.word_tokenize(question)
+    medicines_words = []
+    for word in words:
+        if word in medicines_terms:
+            medicines_words.append(word)
+    return medicines_words
+
 
 #Chatbot response to user querys
 def chatbot_response(msg):
     ints = predict_class(msg, model)
     if ints[0]['intent'] == 'symptoms':
-        medical_terms = tokenize_question(msg) # pass only the medical terms to the api
+        medical_terms = tokenize_health_question(msg) # pass only the medical terms to the api
         if medical_terms:
             symptoms_info = get_symptoms_info(medical_terms)
             nameDescription = name_description(symptoms_info)
@@ -88,8 +97,8 @@ def chatbot_response(msg):
         else:
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
 
-    elif ints[0]['intent'] == 'additional_Detail':
-        medical_terms = tokenize_question(msg)
+    elif ints[0]['intent'] == 'additional_detail':
+        medical_terms = tokenize_health_question(msg)
         if medical_terms:
             symptoms_info = get_symptoms_info(medical_terms)
             hasPart_Data = hasPart(symptoms_info)
@@ -109,20 +118,54 @@ def chatbot_response(msg):
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
 
     elif ints[0]['intent'] == 'treatment':
-        medical_terms = tokenize_question(msg)
+        medical_terms = tokenize_health_question(msg)
         if medical_terms:
             symptoms_info = get_treatment_info(medical_terms)
             treatment = treatment_info(symptoms_info)
             return 'Treatment: {}'.format(treatment)
         else:
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
-    
+        
+    elif ints[0]['intent'] == 'medicine':
+        medicines_terms = tokenize_medicines_question(msg)
+        if medicines_terms:
+            medicine_info = get_medicine_info(medicines_terms)
+            nameDescription_medicine = medicine_name_description(medicine_info)
+            return 'Medicine name and description: {}'.format(nameDescription_medicine)
+        else:
+            return "Sorry! I couldn't understand you. Could you please rephrase your question?"
+
+    elif ints[0]['intent'] == 'medicine_additional_detail':
+        medicines_terms = tokenize_medicines_question(msg)
+        if medicines_terms:
+            medicine_info = get_medicine_info(medicines_terms)
+            additional_detail_medicine = medicine_hasPart(medicine_info)
+            return 'Medicine name and description: {}'.format(additional_detail_medicine)
+        else:
+            return "Sorry! I couldn't understand you. Could you please rephrase your question?"
+          
     elif ints[0]['intent'] == 'pharmacy':
         return "Which area are you looking the pharmacy in?"
     
     elif ints[0]['intent'] == 'pharmacy_follow_up_question':
         return get_pharmacy_response(msg, pharmacy_intent )
 
+    elif ints[0]['intent'] == 'goodbye':
+        text = "Would you like to start a new conversation? (yes/no)"
+        for intent in intents:
+            if intents['intents'][0]['tag'] == 'goodbye':
+                goodbye_intent = intent
+                print(goodbye_intent)
+                return random.choice(goodbye_intent['responses']) + '\n' + text
+
+
+    elif ints[0]['intent'] == 'new_conversation':
+        pattern = intents[0]['responses']
+        if pattern.lower() == "yes":
+            chatbot_response(msg)  # start a new conversation
+        else:
+            return "Okay, bye!"
+        
     else:
         res = get_standard_response(ints, intents)
         return res
@@ -132,10 +175,3 @@ print('DOCTORBOT is Ready')
 
 
 
-# value = input("Enter a search query: ")
-# # medical_terms = tokenize_question(value)
-# # symptoms_info = get_treatment_info(medical_terms)
-# # treatment = treatment_info(symptoms_info)
-# # print (treatment)
-
-# print (get_symptoms_info(value))
