@@ -6,7 +6,7 @@ nltk.download('punkt')
 from nltk.tokenize import word_tokenize
 
 
-pharmacy_data = open('Pharmacy test.json').read()
+pharmacy_data = open('pharmacy data.json').read()
 pharmacy_intent = json.loads(pharmacy_data)
 
 

@@ -20,7 +20,7 @@ from medicines import get_medicine_info, medicine_name_description, medicine_has
 data_file = open('data.json').read()
 intents = json.loads(data_file)
 
-pharmacy_data = open('Pharmacy test.json').read()
+pharmacy_data = open('pharmacy data.json').read()
 pharmacy_intent = json.loads(pharmacy_data)
 
 
@@ -152,19 +152,16 @@ def chatbot_response(msg):
 
     elif ints[0]['intent'] == 'goodbye':
         text = "Would you like to start a new conversation? (yes/no)"
-        for intent in intents:
-            if intents['intents'][0]['tag'] == 'goodbye':
-                goodbye_intent = intent
-                print(goodbye_intent)
-                return random.choice(goodbye_intent['responses']) + '\n' + text
+        responses = ["See you!", "Have a nice day", "Bye!","Hope, I was able to help you", "By"]
+        response = random.choice(responses) + '\n' + text
+        return response
 
-
-    elif ints[0]['intent'] == 'new_conversation':
-        pattern = intents[0]['responses']
-        if pattern.lower() == "yes":
-            chatbot_response(msg)  # start a new conversation
-        else:
-            return "Okay, bye!"
+    # elif ints[0]['intent'] == 'new_conversation':
+    #     pattern = "yes"
+    #     if pattern.lower() == "yes":
+    #         chatbot_response(msg)  # start a new conversation
+    #     else:
+    #         return "Okay, bye!"
         
     else:
         res = get_standard_response(ints, intents)
