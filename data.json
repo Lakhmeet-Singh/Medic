@@ -42,7 +42,7 @@
         },
         {
           "tag": "pharmacy_follow_up_question",
-          "patterns": ["The area is in: "]
+          "patterns": ["The pharmacy is in: "]
         },
         {
           "tag": "medicine_additional_detail",

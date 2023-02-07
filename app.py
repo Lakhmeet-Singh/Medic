@@ -145,16 +145,19 @@ def chatbot_response(msg):
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
           
     elif ints[0]['intent'] == 'pharmacy':
-        return "Which area are you looking the pharmacy in?"
+        pharmacy_info = "The pharmacy is in: AREA or POSTCODE"
+        italic_note = markdown.markdown(f'*{pharmacy_info}*')
+        note = "Please type your query in the following format and area/postcode in capital letters: " + italic_note
+        return "Which area are you looking the pharmacy in?" + '\n' + '\n' + note
     
     elif ints[0]['intent'] == 'pharmacy_follow_up_question':
         return get_pharmacy_response(msg, pharmacy_intent )
 
-    elif ints[0]['intent'] == 'goodbye':
-        text = "Would you like to start a new conversation? (yes/no)"
-        responses = ["See you!", "Have a nice day", "Bye!","Hope, I was able to help you", "By"]
-        response = random.choice(responses) + '\n' + text
-        return response
+    # elif ints[0]['intent'] == 'goodbye':
+    #     text = "Would you like to start a new conversation? (yes/no)"
+    #     responses = ["See you!", "Have a nice day", "Bye!","Hope, I was able to help you", "By"]
+    #     response = random.choice(responses) + '\n' + text
+    #     return response
 
     # elif ints[0]['intent'] == 'new_conversation':
     #     pattern = "yes"
