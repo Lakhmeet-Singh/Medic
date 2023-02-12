@@ -1,138 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Chatbot</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
+    <head>
+    <meta charset="UTF-8">
+    <title>MEDIC</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='styles/images/Transparent BG/icon crop.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
 
-<body>
-  <!-- partial:index.partial.html -->
-  <section class="msger">
-    <header class="msger-header">
-      <div class="msger-header-title">
-        <p>DoctorBOT</p> 
-      </div>
-    </header>
-
-    <main class="msger-chat">
-      <div class="msg left-msg">
-        <div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
-
-        <div class="msg-bubble">
-          <div class="msg-info">
-            <div class="msg-info-name">DoctorBOT</div>
-            <div class="msg-info-time">12:45</div>
-          </div>
-          
-          <div class="msg-text">
-            Hi, Welcome to DoctorBOT! Your personal doctor. 👨🏼‍⚕️  🧑🏼‍⚕️
-            Go ahead and send me a message. 😄 
-          </div>
+    <body>
+        <div class="header-logo"></div>
+            <img src="{{ url_for('static', filename='styles/images/nhs_logo.png') }}" alt="nhs_logo" class="nhs-logo-img" >
+            <img src="{{ url_for('static', filename='styles/images/White BG/Full Logo and Slogan.png') }}" class="medic-logo-img">
         </div>
-      </div>
 
-    </main>
+        <section class="chat-container">
+            <header class="chat-header">
+                <div class="chat-header-title">
+                    <img src="{{ url_for('static', filename='styles/images/Transparent BG/icon crop.png') }}" alt="icon" style="vertical-align: middle;">
+                    <h3 style="display: inline-block; vertical-align: middle; margin-left: 10px;">MEDIC - DoctorBOT</h3>
+                </div>          
+            </header>
 
-    <form class="msger-inputarea">
-      <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
-      <button type="submit" class="msger-send-btn">Send</button>
-    </form>
-  </section>
-  <!-- partial -->
-  <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
-  <script>
+            <main class="chat-messages">
+            <div class="message message-left">
+                <div class="message-img"></div>
+                <div class="message-bubble">
+                    <div class="loading">
+                      <div class="dot"></div>
+                      <div class="dot"></div>
+                      <div class="dot"></div>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-info-name">DoctorBOT</div>
+                        <div class="message-info-time">12:45</div>
+                    </div>
 
-    const msgerForm = get(".msger-inputarea");
-    const msgerInput = get(".msger-input");
-    const msgerChat = get(".msger-chat");
+                    <div class="message-text">
+                        Hi, Welcome to DoctorBOT! Your personal doctor. 👨🏼‍⚕️  🧑🏼‍⚕️
+                        Go ahead and send me a message. 😄
+                    </div>
+                </div>
+            </div>
+            </main>          
 
-
-    // Icons made by Freepik from www.flaticon.com
-    const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
-    const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
-    const BOT_NAME = "    ChatBot";
-    const PERSON_NAME = "You";
-
-    msgerForm.addEventListener("submit", event => {
-      event.preventDefault();
-
-      const msgText = msgerInput.value;
-      if (!msgText) return;
-
-      appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
-      msgerInput.value = "";
-      botResponse(msgText);
-    });
-
-    function appendMessage(name, img, side, text) {
-      //   Simple solution for small apps
-      const msgHTML = `
-      <div class="msg ${side}-msg">
-        <div class="msg-img" style="background-image: url(${img})"></div>
-
-        <div class="msg-bubble">
-          <div class="msg-info">
-            <div class="msg-info-name">${name}</div>
-            <div class="msg-info-time">${formatDate(new Date())}</div>
-          </div>
-
-          <div class="msg-text">${text}</div>
-        </div>
-      </div>
-      `;
-
-      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-      msgerChat.scrollTop += 500;
-    }
-
-    function botResponse(rawText) {
-
-      // Bot Response
-      $.get("/get", { msg: rawText }).done(function (data) {
-        console.log(rawText);
-        console.log(data);
-        const msgText = data;
-        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-
-      });
-
-    }
+            <form class="chat-input">
+                <input type="text" class="input-message" id="textInput" placeholder="Enter your message...">
+                <button type="submit" class="send-btn">Send</button>
+            </form>
+        </section>
 
 
-    // Utils
-    function get(selector, root = document) {
-      return root.querySelector(selector);
-    }
+        <script>
+            const form = document.querySelector(".chat-input");
+            const input = document.querySelector(".input-message");
+            const chat = document.querySelector(".chat-messages");
+        
+            const ChatBot_Image = "/static/styles/images/doctor.png";
+            const User_Image = "/static/styles/images/user.png"
+            const ChatBot_Name = "DoctorBot";
+            const User_Name = "You";
+        
+            form.addEventListener("submit", event => {
+            event.preventDefault();
+        
+            const message = input.value;
+            if (!message) return;
+        
+            appendMessage(User_Name, User_Image, "right", message);
+            input.value = "";
+            botResponse(message);
+            });
+        
+            function appendMessage(name, image, side, text) {
+              let loadingIndicator = '';
+              if (side === 'left') {
+                loadingIndicator = `
+                  <div class="loading left-loading loading-${side}">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>
+                `;
+              }
+              const html = `
+                <div class="msg ${side}-msg">
+                  <div class="msg-img" style="background-image: url(${image})"></div>
+                  <div class="msg-bubble">
+                    ${loadingIndicator}
+                    <div class="msg-info">
+                      <div class="msg-info-name">${name}</div>
+                      <div class="msg-info-time">${formatDate(new Date())}</div>
+                    </div>
+                    <div class="msg-text">${text}</div>
+                  </div>
+                </div>
+              `;
 
-    function formatDate(date) {
-      const h = "0" + date.getHours();
-      const m = "0" + date.getMinutes();
+              chat.insertAdjacentHTML("beforeend", html);
+              chat.scrollTop += 500;
+            }
 
-      return `${h.slice(-2)}:${m.slice(-2)}`;
-    }
+            
+              // Bot Response
+              function botResponse(rawText) {
+                const loadingHtml = `
+                  <div class="msg left-msg">
+                    <div class="msg-img" style="background-image: url(${ChatBot_Image})"></div>
+                    <div class="msg-bubble">
+                      <div class="loading">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+                
+                chat.insertAdjacentHTML("beforeend", loadingHtml);
+                chat.scrollTop += 500;
 
-    // let response = prompt("Do you want to refresh the page? (yes/no)");
-    // if (response === 'yes') {
-    //     location.reload();
-    // } else if (response === 'no') {
-    //     window.location.href = 'https://yourhomepage.com';
-    // } else {
-    //     alert("Invalid response. Please enter 'yes' or 'no'.");
-    // }
+                $.get("/get", { msg: rawText }).done(function(data) {
+                  console.log(rawText);
+                  console.log(data);
 
-    // function refreshPage() {
-    // window.location.reload();
-    // }
+                  const loadingElement = chat.lastElementChild;
+                  loadingElement.querySelector(".loading").style.display = "none";
+                  loadingElement.querySelector(".msg-bubble").innerHTML = `
+                    <div class="msg-info">
+                      <div class="msg-info-name">${ChatBot_Name}</div>
+                      <div class="msg-info-time">${formatDate(new Date())}</div>
+                    </div>
+                    <div class="msg-text">${data}</div>
+                  `;
+                });
+              }
+            
+            function get(selector, root = document) {
+            return root.querySelector(selector);
+            }
 
-    // {{ refresh_script }}
-  </script>
+            function formatDate(date) {
+            const hours = `0${date.getHours()}`.slice(-2);
+            const minutes = `0${date.getMinutes()}`.slice(-2);
+            return `${hours}:${minutes}`;
+            }
+        </script>
 
-</body>
-
+    </body>
 </html>
+  
+
+
+<!-- credits -->
+
+<!-- 
+    <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
+    <a href="https://www.flaticon.com/free-icons/doctor" title="doctor icons">Doctor icons created by Freepik - Flaticon</a> 
+-->
