@@ -72,7 +72,6 @@ nav {
 }
 
 #header {
-  padding: 100px 0;
   text-align: center;
   background-color: var(--background);
   animation: fadeIn 1s ease-in-out forwards;
@@ -311,14 +310,6 @@ nav {
 .video-container {
   width: 80%;
   height: 80%;
-  max-width: 800px;
-  max-height: 800px;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
   transition: all 0.5s ease-in-out;
 }
 
@@ -326,7 +317,7 @@ nav {
   width: 100%;
   left: 0;
   right: 0;
-  transform: scale(1);
+  transform: scale(1.5);
   z-index: 10;
 }
 
