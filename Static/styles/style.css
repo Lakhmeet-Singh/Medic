@@ -1,12 +1,15 @@
 @import url('https://fonts.cdnfonts.com/css/aileron');
 
 :root {
-  --body-bg: linear-gradient(135deg, #058789 0%, #ED8269 100%);
+  --body-bg: linear-gradient(135deg, #035f6180 0%, #ed81698a 100%);
   --msger-bg: #fff;
   --border: 2px solid #ddd;
   --top_border: 2px solid #ED8269;
   --green: #058789;
   --orange: #ED8269;
+  --background: #035f61;
+  --gradient_orange: linear-gradient(to top, #ED8269, #ed8169bc);
+  --gradient_green: linear-gradient(to top, #035f61, #035f61c3);
   /* #ececec; */
   }
   
@@ -27,7 +30,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: var(--body-bg);
+  background: var(--body-bg);;
   font-family: 'Aileron', sans-serif;
   }
 
@@ -38,15 +41,15 @@
   }
 
   .medic-logo-img {
-    width: 150px;
+    width: 200px;
     height: auto;
     position: absolute;
     right: 40px;
-    top: 80%;
+    top: 85%;
   }
   
   .nhs-logo-img {
-    width: 250px;
+    width: 300px;
     height: auto;
     position: absolute;
     left: 40px;
@@ -69,17 +72,39 @@
   
   .chat-header {
   font-size: medium;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px;
   text-align: center;
-  border: var(--top_border);
-  background: var(--orange);
+  background: var(--gradient_orange);
   color: whitesmoke;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   }
+
   .chat-header img{
-    width: 50px;
+    width: 70px;
     height: auto;
+    margin-left: 35px;
   }
+
+  .top-btn {
+    width: 10%;
+    height: 10%;
+    font-size: 1.2em;
+    background: var(--gradient_green);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border: none;
+    color: #fff;
+    padding: 10px;
+    margin-top: 6px;
+    float: right;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .top-btn:hover{
+    box-shadow: 0 0 5px 2px rgba(0.5, 0.5, 0.5, 0.5);
+  }
+
   
 
   /* first message  */
@@ -91,26 +116,41 @@
   padding: 10px;
   }
   .chat-messages::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
   }
   .chat-messages::-webkit-scrollbar-track {
   background: #ddd;
+  border-radius: 7px;
   }
   .chat-messages::-webkit-scrollbar-thumb {
   background: #bdbdbd;
+  border-radius: 7px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  .chat-messages::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+  }
+  .chat-messages::-webkit-scrollbar-track:hover {
+    background: var(--scrollbar-track-hover);
   }
 
   .message  {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
   }
+
+  .space{
+    margin-top: 10px;
+  }
+  
   
   .message-img{
     width: 50px;
     height: 50px;
     margin-right: 10px;
-    background: var(--green);
+    background: var(--background);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     background-image: url(/static/styles/images/doctor.png);
     background-repeat: no-repeat;
     background-position: 1px 2px;
@@ -120,10 +160,12 @@
   
 
   .message-bubble {
-  max-width: 450px;
-  padding: 15px;
-  border-radius: 15px;
-  background: var(--green);
+    max-width: 450px;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 10px;
+    background: var(--gradient_green);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   }
 
   .message-bubble .loading {
@@ -169,7 +211,8 @@
 
   .right-msg .msg-img{
     background: var(--orange);
-    background-image: url(/static/styles/images/user.png);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    background-image: url(/static/styles/images/man.png);
     background-repeat: no-repeat;
     background-position: 2px 2px;
     background-size: 50px 50px;
@@ -177,7 +220,8 @@
   } 
 
   .left-msg .msg-img{
-    background: var(--green);
+    background: var(--background);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     background-image: url(/static/styles/images/doctor.png);
     background-repeat: no-repeat;
     background-position: 1px 2px;
@@ -192,7 +236,8 @@
     max-width: 450px;
     padding: 15px;
     border-radius: 15px;
-    background: var(--orange);
+    background: var(--gradient_orange);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   }
 
   .right-msg {
@@ -228,8 +273,9 @@
 
 .left-msg .msg-bubble {
   color: whitesmoke;
-  border-bottom-right-radius: 0;
-  background: var(--green);
+  border-bottom-left-radius: 0;
+  background: var(--gradient_green);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .left-msg .msg-img {
@@ -299,67 +345,42 @@
   .send-btn {
     width: 20%;
     font-size: 1.2em;
-    background: #ED8269;
+    background: var(--gradient_orange);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border: none;
     color: #fff;
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
+  }
+  .send-btn:hover{
+    box-shadow: 0 0 5px 2px rgba(0.5, 0.5, 0.5, 0.5);
   }
 
 
-  @media (max-width: 767px) {
-    .chat-container {
-      width: 90%;
-      height: auto;
-      margin: 10px;
-    }
-  
-    .header-logo .nhs-logo-img {
-      width: 80px;
-    }
+  @media (min-width: 767px) {
   
     .medic-logo-img {
-      width: 35px;
-      top: 10px;
-      right: 10px;
+      width: 150px;
     }
-  
-    .message-img {
-      width: 40px;
-      height: 40px;
-      margin-right: 5px;
+    
+    .nhs-logo-img {
+      width: 200px;
     }
-  
-    .message-bubble, .msg-bubble {
-      max-width: 90%;
-    }
+
   }
   
-  @media (max-width: 479px) {
-    .chat-container {
-      width: 95%;
-      height: auto;
-      margin: 5px;
+  @media (min-width: 479px) {
+    .chat-container{
+      margin-left: 70px;
+    }
+     .medic-logo-img {
+      width: 150px;
+    }
+    
+    .nhs-logo-img {
+      width: 230px;
     }
   
-    .header-logo .nhs-logo-img {
-      width: 60px;
-    }
-  
-    .medic-logo-img {
-      width: 25px;
-      top: 5px;
-      right: 5px;
-    }
-  
-    .message-img {
-      width: 30px;
-      height: 30px;
-      margin-right: 2px;
-    }
-  
-    .message-bubble, .msg-bubble {
-      max-width: 95%;
-    }
   }
   

@@ -15,7 +15,7 @@
     <body>
         <div class="header-logo"></div>
             <img src="{{ url_for('static', filename='styles/images/nhs_logo.png') }}" alt="nhs_logo" class="nhs-logo-img" >
-            <img src="{{ url_for('static', filename='styles/images/White BG/Full Logo and Slogan.png') }}" class="medic-logo-img">
+            <img src="{{ url_for('static', filename='styles/images/Transparent BG/Full Logo and Slogan copy.png') }}" class="medic-logo-img">
         </div>
 
         <section class="chat-container">
@@ -23,13 +23,14 @@
                 <div class="chat-header-title">
                     <img src="{{ url_for('static', filename='styles/images/Transparent BG/icon crop.png') }}" alt="icon" style="vertical-align: middle;">
                     <h3 style="display: inline-block; vertical-align: middle; margin-left: 10px;">MEDIC - DoctorBOT</h3>
+                    <a href="{{ url_for('static', filename='Templates/index.html') }}"><button type="submit" class="top-btn">Exit</button></a>
                 </div>          
             </header>
 
             <main class="chat-messages">
-            <div class="message message-left">
+              <div class="message message-left">
                 <div class="message-img"></div>
-                <div class="message-bubble">
+                 <div class="message-bubble">
                     <div class="loading">
                       <div class="dot"></div>
                       <div class="dot"></div>
@@ -37,16 +38,36 @@
                     </div>
                     <div class="message-info">
                         <div class="message-info-name">DoctorBOT</div>
-                        <div class="message-info-time">12:45</div>
+                        <div class="message-info-time"> </div>
                     </div>
 
-                    <div class="message-text">
-                        Hi, Welcome to DoctorBOT! Your personal doctor. 👨🏼‍⚕️  🧑🏼‍⚕️
+                    <div class="message">
+                      <div class="message-text">
+                        Hi, Welcome to DoctorBOT! Your personal doctor. 👨🏼‍⚕️ 🧑🏼‍⚕️ <br>
                         Go ahead and send me a message. 😄
-                    </div>
+                      </div>
+                    </div>                         
+                  </div>
                 </div>
-            </div>
-            </main>          
+              </div>
+
+               <div class="message message-left">
+                  <div class="message-img"></div>
+                    <div class="message-bubble">
+                      <div class="message-info">
+                          <div class="message-info-name">DoctorBOT</div>
+                          <div class="message-info-time"> </div>
+                      </div>
+                      <div class="message">
+                        <div class="message-text">
+                          <strong>Please Note: </strong> <br class="space"> <p>If you are searching for Symptoms or Medication with more than one word, please separate them with a hyphen.</p>
+                          <br><br><p>For example, if you're searching for symptom 'high blood pressure' or medication such as 'benzoyl peroxide', please write it like this: high-blood-pressure or benzoyl-peroxide.</p>
+                          <br><br><p>If you're searching for a pharmacy in your area, please type in the name of your location or postcode in CAPITAL letters. <strong>Thank you!</strong> </p>
+                        </div>
+                      </div>
+                    </div>  
+                </div>
+              </main> 
 
             <form class="chat-input">
                 <input type="text" class="input-message" id="textInput" placeholder="Enter your message...">
@@ -61,7 +82,7 @@
             const chat = document.querySelector(".chat-messages");
         
             const ChatBot_Image = "/static/styles/images/doctor.png";
-            const User_Image = "/static/styles/images/user.png"
+            const User_Image = "/static/styles/images/man.png"
             const ChatBot_Name = "DoctorBot";
             const User_Name = "You";
         
