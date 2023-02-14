@@ -4,6 +4,7 @@ blis==0.7.9
 brotlipy==0.7.0
 cachetools==5.2.0
 catalogue==2.0.8
+certifi==2021.5.30
 certifi @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_477u68wvzm/croot/certifi_1671487773341/work/certifi
 cffi @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_62rp5d8fd4/croots/recipe/cffi_1659598655556/work
 charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
