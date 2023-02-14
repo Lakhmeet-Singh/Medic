@@ -1,0 +1,5 @@
+six
+cryptography
+
+[gpgsigning]
+securesystemslib==0.13.1
