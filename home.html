@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <!-- JQyery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Hammer JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+
+    <title>MEDIC</title>
+  </head>
+  <body>
+
+    <!-- Navbar Section -->
+    <section class="Navigation Bar">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand logo">
+            <img src="/Medic logo/Transparent BG/Full Logo and Slogan copy.png" alt="Logo" style="width: 150px;">
+          </a>
+          <div class="bg-dark navbar-light bg-transparent">
+            <button class="navbar-toggler" type="button" id="navbarToggler">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#introduction">About us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#data-source">Data Source</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#services">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#benefits">Benefits</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#demo">Demo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#reviews">Reviews</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </section>
+   
+    <!-- Header Section -->
+    <section id="header" class="pt-5 pb-3">
+      <div class="container">
+        <div class="row d-flex align-items-center">
+          <div class="col-lg-6 text-center text-lg-left">
+            <h1 class="font-weight-bold">Making Healthcare<br>Easier for You</h1>
+            <h6 class="first text">We're a team of experts dedicated to bringing you<br>the best medical services, right at your fingertips.</h6>
+            <p class="second text">Click below to access the DoctorBOT</p>
+            <a href="http://127.0.0.1:5000">
+              <button class="top-btn">DoctorBOT</button>
+            </a>
+          </div>
+          <div class="col-lg-6 d-flex justify-content-center">
+            <img src="/images/medical-app.png" alt="icon" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="introduction">
+      <div class="container">
+        <div class="row d-flex">
+            <div class="col-lg-6 text-center">
+              <img src="/images/aboutus.png" alt="icon" class="img-fluid text-start" style=" width: 400px; height: 400px;">
+            </div>
+            <div class="col-lg-6 text-center">
+              <h2 class="section-heading">ABOUT US</h2>
+              <p class="lead">
+                Our organization is dedicated to providing reliable and accessible medical information to the public. Our chatbot uses the data from the NHS to provide users with quick and accurate information on various health topics, as well as helping them manage their symptoms and make appointments with healthcare providers.
+              </p>
+            </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Data Source Section -->
+    <section id="data-source">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 text-center">
+            <h2 class="section-heading">DATA SOURCE</h2>
+            <p class="lead">
+              We have chosen to use data from the National Health Service (NHS) as our data source. This is because the NHS is a trusted and reliable source of health information, and it provides comprehensive data that covers a wide range of health topics. The data is used to provide users with up-to-date information on symptoms, treatments, and procedures, as well as making appointment bookings with healthcare providers.
+            </p>
+          </div>
+          <div class="col-lg-6 d-flex justify-content-center data-img">
+            <img src="/images/NHS.jpeg" alt="icon" class="img-fluid text-start" style=" width: auto; height: 250px;">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="services" class="container">
+        <h2 class="text-center mb-5">FEATURES</h2>
+        <div class="row">
+          <div class="col-md-4 mb-5 service">
+            <div class="card h-100">
+              <div class="card-body text-center service-info">
+                <i class="fas fa-stethoscope fa-4x mb-3"></i>
+                <h3 class="card-title">Symptoms</h3>
+                <p class="card-text">Get advice from our expert doctors and healthcare professionals, anytime, anywhere.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-5 service">
+            <div class="card h-100">
+              <div class="card-body text-center service-info">
+                <i class="fas fa-capsules fa-4x mb-3"></i>
+                <h3 class="card-title">Medication</h3>
+                <p class="card-text">Get your prescription filled and delivered to your door, without the hassle of going to the pharmacy.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-5 service">
+            <div class="card h-100">
+              <div class="card-body text-center service-info">
+                <i class="fas fa-prescription-bottle-alt  fa-4x mb-3"></i>
+                <h3 class="card-title">Pharmacy</h3>
+                <p class="card-text">Get your lab tests done from the comfort of your own home, and receive your results quickly and securely.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+      <!-- Benefits Section -->
+      <section id="benefits">
+        <div class="container">
+          <div class="row  d-flex">
+            <div class="col-lg-6 text-center">
+              <img src="/images/health.png" alt="icon" class="img-fluid" style="width: 350px; height: 350px;">
+            </div>
+            <div class="col-lg-6 ">
+              <h2 class="section-heading text-center">BENEFITS</h2>
+              <hr class="my-4">
+              <p class="lead text-center">
+                Our chatbot provides several key benefits to users, including:
+                <ul>
+                  <li>Convenient and accessible 24/7</li>
+                  <li>Quick and accurate information on health topics</li>
+                  <li>Help managing symptoms and making appointment bookings</li>
+                  <li>Reduces burden on healthcare providers</li>
+                  <li>Saves time and reduces waiting times for users</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demo/Screenshots Section -->
+      <section id="demo">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading">DoctorBot DEMO</h2>
+              <hr class="my-4">
+              <div class="video d-flex justify-content-center">
+                <div class="video-container col-12 col-md-6 col-lg-6">
+                  <video width="100%" height="auto" controls>
+                    <source src="/images/Standard.mov" type="video/mp4">
+                  </video>
+                </div>
+                <div class="video-container col-12 col-md-6 col-lg-6">
+                  <video width="100%" height="auto" controls>
+                    <source src="/images/Health.mov" type="video/mp4">
+                  </video>
+                </div>
+                <div class="video-container col-12 col-md-6 col-lg-6">
+                  <video width="100%" height="auto" controls>
+                    <source src="/images/medicne.mov" type="video/mp4">
+                  </video>
+                </div>
+                <div class="video-container col-12 col-md-6 col-lg-6">
+                  <video width="100%" height="auto" controls>
+                    <source src="/images/Pharmacy.mov" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>>
+      
+      
+
+      <!-- Review Section -->
+        <section id="reviews" class="mt-5">
+            <h2 class="text-center">What Our Users Say</h2>
+            <div class="container">
+                <div class="review-container">
+                        <div class="review">
+                            <div class="review-info">
+                                <img src="images/man.png" alt="" class="mr-3">
+                                <h3 class="review-name">John Doe</h3>
+                                <p>Medical UI has made healthcare so much easier for me. I love the convenience of being able to consult with a doctor and get my prescription filled from the comfort of my own home.</p>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review">
+                            <div class="review-info">
+                                <img src="images/woman.png" alt="" class="mr-3">
+                                <h3 class="review-name">Ellisa Perry</h3>
+                                <p>I was so impressed with the quality of service I received from Medical UI. The doctors were knowledgeable and professional, and I received my lab results faster than I expected.</p>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review">
+                            <div class="review-info">
+                                <img src="images/man 2.png" alt="" class="mr-3">
+                                <h3 class="review-name">Alex Hales</h3>
+                                <p>I was so impressed with the quality of service I received from Medical UI. The doctors were knowledgeable and professional, and I received my lab results faster than I expected.</p>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review">
+                            <div class="review-info">
+                                <img src="images/woman 2.png" alt="" class="mr-3">
+                                <h3 class="review-name">Kate Williams</h3>
+                                <p>I was so impressed with the quality of service I received from Medical UI. The doctors were knowledgeable and professional, and I received my lab results faster than I expected.</p>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12 text-center">
+                    <a class="review-arrow review-prev" href="#"><i class="fas fa-solid fa-arrow-left"></i></a>
+                    <a class="review-arrow review-next" href="#"><i class="fas fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+
+    <!-- Chatbot Section -->
+    <section id="cta" class=" text-center py-5">
+        <h2>Start Using <span>MEDIC</span> Today</h2>
+        <p class="lead">Join the thousands of users who trust us to deliver high-quality healthcare services, right at their fingertips.</p>
+        <button class="btn">Get Started</button>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class=" footer text-center py-3">
+        <p>Copyright &copy; MEDIC 2023</p>
+        <div class="illustration"> 
+            <p>Illustration from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p> 
+        </div>
+    </footer>
+    
+
+    <!-- JavaScript -->
+
+
+    <!-- Reviews -->
+    <script>
+        const reviewContainer = document.querySelector('.review-container');
+        const reviews = document.querySelectorAll('.review');
+        const reviewPrev = document.querySelector('.review-prev');
+        const reviewNext = document.querySelector('.review-next');
+
+        let currentReview = 0;
+
+        // Hide all reviews except for the first one
+        for (let i = 1; i < reviews.length; i++) {
+        reviews[i].style.display = "none";
+        }
+
+        // Show next review when the next arrow is clicked
+        reviewNext.addEventListener('click', function () {
+        event.preventDefault();
+        reviews[currentReview].style.display = "none";
+
+        currentReview = (currentReview + 1) % reviews.length;
+        reviews[currentReview].style.display = "block";
+        
+        // Add animation class to the review container
+        reviewContainer.classList.add('animate');
+        
+        // Remove the animation class after the animation is finished
+        setTimeout(function () {
+            reviewContainer.classList.remove('animate');
+        }, 500);
+        });
+
+        // Show previous review when the prev arrow is clicked
+        reviewPrev.addEventListener('click', function () {
+        event.preventDefault();
+        reviews[currentReview].style.display = "none";
+
+        currentReview = (currentReview + reviews.length - 1) % reviews.length;
+        reviews[currentReview].style.display = "block";
+        
+        // Add animation class to the review container
+        reviewContainer.classList.add('animateRight');
+        
+        // Remove the animation class after the animation is finished
+        setTimeout(function () {
+            reviewContainer.classList.remove('animateRight');
+        }, 500);
+        });
+
+      </script>
+      
+
+      <!-- Demo -->
+
+      <script>
+          const demoContainer = document.querySelector("#demo .video");
+          const videos = demoContainer.querySelectorAll("video");
+          
+          let activeVideoIndex = 0;
+
+          function updateVideos() {
+            videos.forEach((video, index) => {
+              if (index === activeVideoIndex) {
+                video.style.transform = "scale(1.2)";
+                video.style.opacity = "1";
+              } else {
+                video.style.transform = "scale(0.8)";
+                video.style.opacity = "0.5";
+              }
+            });
+          }
+
+          const mc = new Hammer(demoContainer);
+          mc.on("swipeleft", () => {
+            activeVideoIndex--;
+            if (activeVideoIndex < 0) {
+              activeVideoIndex = videos.length - 1;
+            }
+            updateVideos();
+          });
+          mc.on("swiperight", () => {
+            activeVideoIndex++;
+            if (activeVideoIndex >= videos.length) {
+              activeVideoIndex = 0;
+            }
+            updateVideos();
+          });
+
+          updateVideos();
+      </script>
