@@ -140,7 +140,7 @@ def chatbot_response(msg):
         if medicines_terms:
             medicine_info = get_medicine_info(medicines_terms)
             additional_detail_medicine = medicine_hasPart(medicine_info)
-            return 'Medicine name and description: {}'.format(additional_detail_medicine)
+            return 'Additional Information: {}'.format(additional_detail_medicine)
         else:
             return "Sorry! I couldn't understand you. Could you please rephrase your question?"
           
