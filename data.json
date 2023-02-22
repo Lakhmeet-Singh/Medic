@@ -55,7 +55,7 @@
 
         {
           "tag": "pharmacy_follow_up_question",
-          "patterns": ["The pharmacy is in: ", "Where is the nearest pharmacy in:", "Can you tell me about pharmacies in:", "What are the pharmacy options in:", "I need a pharmacy in:"]
+          "patterns": ["The pharmacy is in", "Where is the nearest pharmacy in", "Can you tell me about pharmacies in", "What are the pharmacy options in", "I need a pharmacy in"]
         },
 
         {
