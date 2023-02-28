@@ -1,7 +1,7 @@
 import requests
 import json
 import nltk
-import symptoms
+import terms
 
 nltk.download('popular')
 nltk.download('punkt')
@@ -38,7 +38,7 @@ def api_data(data):
 
 
 #high blood pressure
-medical_terms = symptoms.medical_terms_list
+medical_terms = terms.medical_terms_list
 medical_terms_tokens = [term.split("-") for term in medical_terms]
 # print(medical_terms_tokens)
 

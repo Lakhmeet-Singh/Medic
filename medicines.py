@@ -62,19 +62,16 @@ def medicine_hasPart(med):
             try: 
                 headline = nested_data['headline']
                 text = nested_data['text']
-                bold_headline = markdown.markdown(f'**{headline}**')
+                bold_headline = f'<br> <strong style="padding-bottom: 10px;">{headline}</strong> <br>'
                 for word in ignore_words:
                     if word in text:
                         text = text.replace(word , " ")
-                medicine_part2.append(bold_headline + text)
+                medicine_part2.append(bold_headline + '<p style="padding-bottom: 10px;">' + '<ul style="padding-left: 10px;">' + text + '</ul> </p>')
             except KeyError:
                 pass
-    return medicine_part1 + medicine_part2
-
-
-
-
-# value = input("Enter a search query: ")
-
-# medicine_name_description(value)
-# medicine_hasPart(value)
+    # print (medicine_part1 + medicine_part2)
+    output = ' '.join(medicine_part1 + medicine_part2)
+    output = output.replace('<h2', '<h4 style="padding-top: 10px; font-weight: bold;"')
+    output = output.replace('</h2>', '</h4>')
+    output = output.replace('<a ', '<a style="text-decoration: underline; color: white;" ')
+    return output
